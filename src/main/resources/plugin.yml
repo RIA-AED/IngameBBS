@@ -1,0 +1,7 @@
+name: IngameBBS
+version: 1.0.0
+main: ink.ltm.ingameBBS.IngameBBS
+description: An Ingame BBS
+author: Longtianmu
+load: STARTUP
+api-version: 1.18
