@@ -4,29 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/databaseUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/SignClickListener.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/CalculateCRC32.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="First Stage">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/PlayerCommandHandler.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/messageConverter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/databaseUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/databaseUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/SignClickListener.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/CalculateCRC32.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/CalculateCRC32.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,6 +91,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="IngameBBS.main/invalid/Minecraft" />
+    </ignored-facets>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -113,11 +111,12 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;
   }
 }</component>
   <component name="RunManager" selected="Gradle.IngameBBS [shadowJar]">
@@ -223,8 +222,20 @@
       <option name="presentableId" value="Default" />
       <updated>1667732737422</updated>
       <workItem from="1667732741667" duration="1481000" />
-      <workItem from="1667784796184" duration="24239000" />
+      <workItem from="1667784796184" duration="26389000" />
+      <workItem from="1667874936688" duration="181000" />
+      <workItem from="1667875128139" duration="72000" />
+      <workItem from="1667875211105" duration="43206000" />
+      <workItem from="1668136962434" duration="3147000" />
     </task>
+    <task id="LOCAL-00001" summary="First Stage">
+      <created>1667825644250</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667825644250</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,6 +251,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First Stage" />
+    <option name="LAST_COMMIT_MESSAGE" value="First Stage" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

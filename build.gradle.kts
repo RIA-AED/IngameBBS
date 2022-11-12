@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.7.20"
+    kotlin("plugin.serialization") version "1.7.20"
     id ("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
@@ -23,7 +24,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    shadow("de.tr7zw:item-nbt-api-plugin:2.10.0")
+    implementation("de.tr7zw:item-nbt-api-plugin:2.10.0")
 
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
@@ -31,6 +32,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-kotlin-datetime:$exposedVersion")
     implementation("org.xerial:sqlite-jdbc:3.39.3.0")
     implementation("org.slf4j:slf4j-nop:2.0.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation("io.github.reactivecircus.cache4k:cache4k:0.9.0")
 
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:1.7.20")
 }

@@ -1,0 +1,23 @@
+#Item
+item:
+  name: "声光电炫彩酷告示牌"
+  info: "可以进行互动的神秘牌子"
+  createSuccess: "创建可互动告示牌成功"
+  icon: "*"
+
+#Info
+info:
+  infoDeco: "blahblah"
+  content: "信息：%content"
+  detail: "详情：由玩家 %player 创建于 %date"
+  likes: "累计：获赞 %like ，获踩 %dislike"
+  interact: "互动选项："
+  like: "blahblah"
+  dislike: "  blahblah"
+
+#Votes
+votes:
+  like: "点赞!"
+  dislike: "点踩!"
+  cancel: "已经取消了原先的评价!"
+  change: "已经更改了原先的评价!"
