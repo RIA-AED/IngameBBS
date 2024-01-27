@@ -17,6 +17,7 @@ import org.bukkit.entity.Player
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Description
 import revxrsal.commands.bukkit.annotation.CommandPermission
+import java.util.*
 
 class PlayerCommandBasic {
     private suspend fun interactSign(
@@ -32,7 +33,7 @@ class PlayerCommandBasic {
             actor.sendMessage(actorMessage)
             actor.playSound(sound)
             val value = DatabaseUtils.lookupSignInfo(signID)
-            val player = Bukkit.getPlayer(value!!.creatorUUID)
+            val player = Bukkit.getPlayer(UUID.fromString(value!!.creatorUUID))
             if (player != null) {
                 player.sendMessage(
                     MiniMessage.miniMessage().deserialize(

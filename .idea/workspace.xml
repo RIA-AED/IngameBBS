@@ -9,29 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Bump version to 1.1.0-Alpha">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/admin/ReloadConfig.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignEnum.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/GeneralUtils.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/playerVoteUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/PlayerCommandHandler.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/CalculateCRC32.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/databaseUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/DatabaseUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/messageConverter.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +86,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -155,7 +134,7 @@
       <recent name="ink.ltm.ingameBBS.commands.player" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.IngameBBS [shadowJar]">
+  <component name="RunManager" selected="Gradle.IngameBBS [runServer]">
     <configuration name="IngameBBS [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -275,10 +254,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.IngameBBS [runServer]" />
         <item itemvalue="Gradle.IngameBBS [shadowJar]" />
         <item itemvalue="Gradle.IngameBBS [build]" />
         <item itemvalue="Gradle.IngameBBS [jar]" />
-        <item itemvalue="Gradle.IngameBBS [runServer]" />
         <item itemvalue="Gradle.IngameBBS [knows]" />
       </list>
     </recent_temporary>
@@ -325,7 +304,7 @@
       <workItem from="1706286850657" duration="3476000" />
       <workItem from="1706347730566" duration="3235000" />
       <workItem from="1706356292637" duration="3209000" />
-      <workItem from="1706359544889" duration="7444000" />
+      <workItem from="1706359544889" duration="8681000" />
     </task>
     <task id="LOCAL-00001" summary="First Stage">
       <created>1667825644250</created>
@@ -341,7 +320,15 @@
       <option name="project" value="LOCAL" />
       <updated>1668231438101</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Bump version to 1.1.0-Alpha">
+      <option name="closed" value="true" />
+      <created>1706368628406</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706368628406</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
