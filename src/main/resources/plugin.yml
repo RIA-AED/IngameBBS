@@ -1,37 +1,14 @@
 name: IngameBBS
-version: 1.0.0
+version: 1.1.0
 main: ink.ltm.ingameBBS.IngameBBS
 description: An Ingame BBS
 author: Longtianmu
 load: STARTUP
-api-version: 1.18
+api-version: 1.20
 permissions:
   ingamebbs.player.*:
-    description: "Node for lookup a sign"
+    description: "Node for Player Interact a sign"
     default: true
     children:
       ingamebbs.player.info: true
-      ingamebbs.player.like: true
-      ingamebbs.player.dislike: true
-      ingamebbs.player.rank: true
-commands:
-  igbinfo:
-    description: "This is a command"
-    usage: "/igbinfo <arg>"
-    permission: ingamebbs.player.info
-    permission-message: "You do not have permission to use this command"
-  igblike:
-    description: "This is a command"
-    usage: "/igblike <arg>"
-    permission: ingamebbs.player.like
-    permission-message: "You do not have permission to use this command"
-  igbdislike:
-    description: "This is a command"
-    usage: "/igbdislike <arg>"
-    permission: ingamebbs.player.dislike
-    permission-message: "You do not have permission to use this command"
-  igbrank:
-    description: "This is a command"
-    usage: "/igbrank"
-    permission: ingamebbs.player.rank
-    permission-message: "You do not have permission to use this command"
+      ingamebbs.player.vote: true

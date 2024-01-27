@@ -1,45 +1,49 @@
 package ink.ltm.ingameBBS.data
 
 import kotlinx.datetime.LocalDate
-import kotlinx.serialization.Serializable
+import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.kotlin.datetime.date
 
-object SignData : Table() {
-    val uniqueID: Column<String> = text("uniqueID").uniqueIndex()
-    val creatorName: Column<String> = varchar("creatorName", 20) //创建告示牌的玩家名
-    val createTime: Column<LocalDate> = date("createTime") //创建时间，为2022/11/07 11:29这种
-    val position: Column<String> = text("position") //放置位置
-    val likeCount: Column<Int> = integer("lickCount") //点赞数
-    val dislikeCount: Column<Int> = integer("dislikeCount") //点踩数
-    val interactList: Column<String> = text("interactList")
-    val signContent: Column<String> = text("signContent") //详情内容
-    val isDeleted: Column<Boolean> = bool("isDeleted") //是否已被拆除
+object SignInfos : IntIdTable() {
+    val uniqueID = varchar("uniqueID", 36).uniqueIndex()
+    val creator = reference("creator", SignUsers.playerUUID)
+
+    val createTime = date("createTime") //创建时间，为2022/11/07 11:29这种
+    val position = text("position") //放置位置
+    val world = text("world")
+    val signRemark = text("signContent")
+
+    val isDeleted: Column<Boolean> = bool("isDeleted")
 }
 
-@Serializable
-data class SignDataInternal(
-    val uid: String,
-    val creatorName: String,
-    val createTime: LocalDate,
+data class SignInfoInternal(
+    val uniqueID: String,
+    val creatorUUID: String,
+    val createName: String,
     val position: String,
-    var likeCount: Int,
-    var dislikeCount: Int,
-    var interactList: MutableList<InteractType>,
-    val signContent: String,
-    val isDeleted: Boolean
+    val world: String,
+
+    val createTime: String = "",
+    val signRemark: String = "null",
+    val likeCount: Int = 0,
+    val dislikeCount: Int = 0
 )
 
-@Serializable
-data class InteractType(
-    val player: String,
-    var type: Boolean
-)
+object SignUsers : Table() {
+    val playerUUID = varchar("playerUUID", 36).uniqueIndex()
+    val playerName = varchar("playerName", 32)
+    val playerJoinTime = date("playerJoinTime")
 
-enum class LikesResult {
-    NO_SUCH_DATA,
-    CANCEL_SAME,
-    CANCEL_DIFFERENT,
-    SUCCESS
+    val isBanned = bool("isBanned")
+    override val primaryKey = PrimaryKey(playerUUID, name = "PK_playerUUID")
+}
+
+object SignInteracts : IntIdTable() {
+    val sign = reference("sign", SignInfos.uniqueID)
+    val player = reference("player", SignUsers.playerUUID)
+
+    val interactTime: Column<LocalDate> = date("createTime")
+    val type = enumeration("type", InteractType::class)
 }

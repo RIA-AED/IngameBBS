@@ -1,23 +1,32 @@
-#Item
+#Item, and all String in this file is MiniMessage Format, non-strict mode
 item:
-  name: "声光电炫彩酷告示牌"
-  info: "可以进行互动的神秘牌子"
-  createSuccess: "创建可互动告示牌成功"
-  icon: "*"
+  name: '声光电炫彩酷告示牌'
+  lore: '可以进行互动的神秘牌子'
 
-#Info
-info:
-  infoDeco: "blahblah"
-  content: "信息：%content"
-  detail: "详情：由玩家 %player 创建于 %date"
-  likes: "累计：获赞 %like ，获踩 %dislike"
-  interact: "互动选项："
-  like: "blahblah"
-  dislike: "  blahblah"
+#Sign Info
+sign:
+  icon: '*'
+  waiting: '等待中...'
+  message: 信息： <remark><newline>详情：由玩家 <creator> 创建于 <date><newline>累计：获赞 <like-count> ，获踩 <dislike-count><newline>互动选项： <like-button> <dislike-button>
+  likeButton: '点赞'
+  dislikeButton: '点踩'
 
-#Votes
-votes:
-  like: "点赞!"
-  dislike: "点踩!"
-  cancel: "已经取消了原先的评价!"
-  change: "已经更改了原先的评价!"
+#Interact Message
+interact:
+  created: '创建可互动告示牌成功'
+  removed: '成功移除告示牌'
+
+#Vote Message
+vote:
+  like: '点赞!'
+  dislike: '点踩!'
+  getLike: '你获得了 <player> 的赞!'
+  getDislike: '你获得了 <player> 的踩!'
+  offlineMessage: '你收到了 <count> 个离线点赞'
+  likeSound: 'entity.experience_orb.pickup'
+  dislikeSound: 'entity.player.attack.sweep'
+
+#Error Message
+error:
+  notOwner: '你不是这个告示牌的所有者'
+  notExist: '这个告示牌不存在'

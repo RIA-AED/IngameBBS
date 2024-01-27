@@ -1,22 +1,22 @@
 package ink.ltm.ingameBBS
 
-import de.tr7zw.nbtapi.NBTItem
-import ink.ltm.ingameBBS.commands.PlayerDislikeCommandHandler
-import ink.ltm.ingameBBS.commands.PlayerInfoCommandHandler
-import ink.ltm.ingameBBS.commands.PlayerLikeCommandHandler
-import ink.ltm.ingameBBS.data.SignData
-import ink.ltm.ingameBBS.data.SignDataInternal
+import ink.ltm.ingameBBS.commands.admin.ReloadConfig
+import ink.ltm.ingameBBS.commands.player.PlayerCommandBasic
+import ink.ltm.ingameBBS.data.SignInfos
+import ink.ltm.ingameBBS.data.SignInteracts
+import ink.ltm.ingameBBS.data.SignUsers
 import ink.ltm.ingameBBS.listeners.AdvancedSignPlaceListener
-import ink.ltm.ingameBBS.utils.messageConverter
-import ink.ltm.ingameBBS.utils.saveAllCache
-import io.github.reactivecircus.cache4k.Cache
+import ink.ltm.ingameBBS.utils.GeneralUtils.updateConfigObject
+import ink.ltm.ingameBBS.utils.convert
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.Tag
 import org.bukkit.event.Listener
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.ShapelessRecipe
+import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.java.JavaPlugin
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -24,48 +24,73 @@ import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.transaction
+import revxrsal.commands.bukkit.BukkitCommandHandler
+import revxrsal.commands.ktx.supportSuspendFunctions
 import java.sql.Connection
+import java.util.logging.Logger
 
 class IngameBBS : JavaPlugin(), Listener {
     companion object {
         lateinit var db: Database
-        val signBlockList = Material.values().filter { it.name.contains("SIGN") }
-        val signList = signBlockList.filter { it.isItem }
-        val cache = Cache.Builder()
-            .maximumCacheSize(200)
-            .build<String, SignDataInternal>()
-        const val oneSec = 20L
+        lateinit var instance: IngameBBS
+        lateinit var pluginLogger: Logger
 
-        object SignItemInfo {
-            var signName = "声光电炫彩酷告示牌"
-            var signInfo = "可以进行互动的神秘牌子"
-            var signCreateSuccess = "创建可互动告示牌成功"
-            var signIcon = "*"
+        val offlineMap = mutableMapOf<String, Int>()
+        val signBlockList = Material.entries.filter { Tag.ALL_SIGNS.isTagged(it) }.filter { it.isBlock }
+        val signList = Material.entries.filter { Tag.ALL_SIGNS.isTagged(it) }.filter { it.isItem }
+
+        object NamespacedKeys {
+            val advancedSign = NamespacedKey(instance, "AdvancedSign")
+            val advancedSignID = NamespacedKey(instance, "AdvancedSignID")
+        }
+
+        object ItemInfo {
+            var name = "声光电炫彩酷告示牌"
+            var lore = "可以进行互动的神秘牌子"
         }
 
         object SignInfo {
-            var signInfoDeco = "blahblah"
-            var signContent = "信息：%content"
-            var signDetail = "详情：由玩家 %player 创建于 %date"
-            var signLikes = "累计：获赞 %like ，获踩 %dislike"
-            var signInteract = "互动选项："
-            var signLike = "blahblah"
-            var signDislike = "blahblah"
+            var icon = "*"
+            var waiting = "blahblah"
+            var message = """
+            信息： <remark><newline>
+            详情：由玩家 <creator> 创建于 <date><newline>
+            累计：获赞 <like-count> ，获踩 <dislike-count><newline>
+            互动选项： <like-button> <dislike-button>
+            """
+            var likeButton = "点赞"
+            var dislikeButton = "点踩"
         }
 
-        object SignVoteInfo {
-            var voteLike = "点赞!"
-            var voteDislike = "点踩!"
-            var voteChange = "已经更改了原先的评价!"
-            var voteCancel = "已经取消了原先的评价!"
+        object VoteMessage {
+            var like = "点赞!"
+            var dislike = "点踩!"
+            var getLike = "收到 <player> 点赞"
+            var getDislike = "收到 <player> 点踩"
+            var offlineMessage = "你收到了 <count> 个离线点赞"
+            var likeSound = "entity.experience_orb.pickup"
+            var dislikeSound = "entity.player.attack.sweep"
+        }
+
+        object InteractMessage {
+            var created = "创建可互动告示牌成功"
+            var removed = "成功移除告示牌"
+        }
+
+        object ErrorMessage {
+            var notOwner = "你不是这个告示牌的创建者"
+            var notExist = "该告示牌不存在"
         }
     }
 
     override fun onEnable() {
+        instance = this
+        pluginLogger = this.logger
         if (!dataFolder.exists()) {
             dataFolder.mkdirs()
         }
-        onConfigInit()
+        onConfigLoad()
+        onConfigChange()
         onDatabaseInit()
         onRecipesInit()
         onRegisterInit()
@@ -76,26 +101,20 @@ class IngameBBS : JavaPlugin(), Listener {
         onClosed()
     }
 
-    private fun onConfigInit() {
+    fun onConfigLoad() {
         saveDefaultConfig()
-        SignItemInfo.signName = config.getString("item.name") ?: SignItemInfo.signName
-        SignItemInfo.signInfo = config.getString("item.info") ?: SignItemInfo.signInfo
-        SignItemInfo.signCreateSuccess = config.getString("item.createSuccess") ?: SignItemInfo.signCreateSuccess
-        SignItemInfo.signIcon = config.getString("item.icon") ?: SignItemInfo.signIcon
+        updateConfigObject(ItemInfo, "item", config)
+        updateConfigObject(SignInfo, "sign", config)
+        updateConfigObject(InteractMessage, "interact", config)
+        updateConfigObject(VoteMessage, "vote", config)
+        updateConfigObject(ErrorMessage, "error", config)
+        logger.info("Config Loaded Successfully")
+    }
 
-        SignInfo.signInfoDeco = config.getString("info.infoDeco") ?: SignInfo.signInfoDeco
-        SignInfo.signContent = config.getString("info.content") ?: SignInfo.signContent
-        SignInfo.signDetail = config.getString("info.detail") ?: SignInfo.signDetail
-        SignInfo.signLikes = config.getString("info.likes") ?: SignInfo.signLikes
-        SignInfo.signInteract = config.getString("info.interact") ?: SignInfo.signInteract
-        SignInfo.signLike = config.getString("info.like") ?: SignInfo.signLike
-        SignInfo.signDislike = config.getString("info.dislike") ?: SignInfo.signDislike
-
-        SignVoteInfo.voteLike = config.getString("vote.like") ?: SignVoteInfo.voteLike
-        SignVoteInfo.voteDislike = config.getString("vote.dislike") ?: SignVoteInfo.voteDislike
-        SignVoteInfo.voteChange = config.getString("vote.change") ?: SignVoteInfo.voteChange
-        SignVoteInfo.voteCancel = config.getString("vote.cancel") ?: SignVoteInfo.voteCancel
-        logger.info("Config Initialized Successfully")
+    private fun onConfigChange() {
+        config.options().copyDefaults(false)
+        saveConfig()
+        logger.info("Config Updated Successfully.")
     }
 
     private fun onDatabaseInit() {
@@ -104,33 +123,30 @@ class IngameBBS : JavaPlugin(), Listener {
         TransactionManager.defaultDatabase = db
         transaction {
             addLogger(StdOutSqlLogger)
-            SchemaUtils.create(SignData)
+            SchemaUtils.create(SignUsers)
+            SchemaUtils.create(SignInfos)
+            SchemaUtils.create(SignInteracts)
         }
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, Runnable { saveAllCache() }, oneSec * 60, oneSec * 600)
         logger.info("Database Initialized Successfully.")
     }
 
     private fun onRecipesInit() {
-        for (i in signList) {
-            val name = NamespacedKey(this, "advanced_${i.name}_recipe")
+        signList.forEach { i ->
+            val recipeName = NamespacedKey(this, "advanced_${i.name}_recipe")
 
             val advancedSign = ItemStack(i)
             val im = advancedSign.itemMeta
-            im.displayName(messageConverter(SignItemInfo.signName))
-            val lists = mutableListOf<Component>()
-            for (j in SignItemInfo.signInfo.split("&n")) {
-                lists.add(messageConverter(j))
+            im.displayName(ItemInfo.name.convert())
+            val lore = mutableListOf<Component>()
+            ItemInfo.lore.split("<newline>").forEach {
+                lore.add(it.convert())
             }
-            im.lore(lists)
+            im.lore(lore)
+            im.persistentDataContainer.set(NamespacedKeys.advancedSign, PersistentDataType.BOOLEAN, true)
             advancedSign.itemMeta = im
-            advancedSign.amount = 1
-            val nbti = NBTItem(advancedSign)
-            nbti.setBoolean("AdvancedSign", true)
-            nbti.applyNBT(advancedSign)
 
-            val recipe = ShapelessRecipe(name, advancedSign)
-                .addIngredient(1, Material.REDSTONE)
-                .addIngredient(1, i)
+            val recipe =
+                ShapelessRecipe(recipeName, advancedSign).addIngredient(1, Material.REDSTONE).addIngredient(1, i)
 
             Bukkit.addRecipe(recipe)
             logger.info("Recipe of ${i.name} Initialized Successfully.")
@@ -138,16 +154,23 @@ class IngameBBS : JavaPlugin(), Listener {
     }
 
     private fun onRegisterInit() {
+        onRegisterCommand()
         Bukkit.getPluginManager().registerEvents(AdvancedSignPlaceListener(), this)
 
-        Bukkit.getPluginCommand("igbinfo")?.setExecutor(PlayerInfoCommandHandler())
-        Bukkit.getPluginCommand("igblike")?.setExecutor(PlayerLikeCommandHandler())
-        Bukkit.getPluginCommand("igbdislike")?.setExecutor(PlayerDislikeCommandHandler())
         logger.info("Listeners And Command Initialized Successfully.")
     }
 
+    private fun onRegisterCommand() {
+        val commandHandler = BukkitCommandHandler.create(this)
+        commandHandler.supportSuspendFunctions()
+        commandHandler.register(PlayerCommandBasic())
+        commandHandler.register(ReloadConfig())
+        commandHandler.registerBrigadier()
+
+        logger.info("Command Initialized Successfully.")
+    }
+
     private fun onClosed() {
-        saveAllCache()
         Bukkit.resetRecipes()
     }
 }
