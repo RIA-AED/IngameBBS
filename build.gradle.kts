@@ -8,9 +8,10 @@ plugins {
 }
 
 group = "ink.ltm"
-version = "1.1.0-SNAPSHOT"
+version = "1.1.1-SNAPSHOT"
 val lampVersion = "3.1.8"
 val exposedVersion = "0.46.0"
+val adventureVersion = "4.15.0"
 
 repositories {
     mavenCentral()
@@ -33,10 +34,10 @@ dependencies {
 
     implementation("com.github.Revxrsal.Lamp:common:${lampVersion}")
     implementation("com.github.Revxrsal.Lamp:bukkit:${lampVersion}")
-    implementation("net.kyori:adventure-text-minimessage:4.15.0")
+    implementation("net.kyori:adventure-text-minimessage:${adventureVersion}")
+    implementation("net.kyori:adventure-text-serializer-legacy:${adventureVersion}")
 
     implementation("org.jetbrains.exposed:exposed-core:${exposedVersion}")
-    //implementation("org.jetbrains.exposed:exposed-dao:${exposedVersion}")
     implementation("org.jetbrains.exposed:exposed-jdbc:${exposedVersion}")
     implementation("org.jetbrains.exposed:exposed-kotlin-datetime:${exposedVersion}")
     implementation("org.xerial:sqlite-jdbc:3.45.0.0")

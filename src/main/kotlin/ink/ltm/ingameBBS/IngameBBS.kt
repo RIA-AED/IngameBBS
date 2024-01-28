@@ -2,6 +2,7 @@ package ink.ltm.ingameBBS
 
 import ink.ltm.ingameBBS.commands.admin.ReloadConfig
 import ink.ltm.ingameBBS.commands.player.PlayerCommandBasic
+import ink.ltm.ingameBBS.data.Config
 import ink.ltm.ingameBBS.data.SignInfos
 import ink.ltm.ingameBBS.data.SignInteracts
 import ink.ltm.ingameBBS.data.SignUsers
@@ -43,44 +44,6 @@ class IngameBBS : JavaPlugin(), Listener {
             val advancedSign = NamespacedKey(instance, "AdvancedSign")
             val advancedSignID = NamespacedKey(instance, "AdvancedSignID")
         }
-
-        object ItemInfo {
-            var name = "声光电炫彩酷告示牌"
-            var lore = "可以进行互动的神秘牌子"
-        }
-
-        object SignInfo {
-            var icon = "*"
-            var waiting = "blahblah"
-            var message = """
-            信息： <remark><newline>
-            详情：由玩家 <creator> 创建于 <date><newline>
-            累计：获赞 <like-count> ，获踩 <dislike-count><newline>
-            互动选项： <like-button> <dislike-button>
-            """
-            var likeButton = "点赞"
-            var dislikeButton = "点踩"
-        }
-
-        object VoteMessage {
-            var like = "点赞!"
-            var dislike = "点踩!"
-            var getLike = "收到 <player> 点赞"
-            var getDislike = "收到 <player> 点踩"
-            var offlineMessage = "你收到了 <count> 个离线点赞"
-            var likeSound = "entity.experience_orb.pickup"
-            var dislikeSound = "entity.player.attack.sweep"
-        }
-
-        object InteractMessage {
-            var created = "创建可互动告示牌成功"
-            var removed = "成功移除告示牌"
-        }
-
-        object ErrorMessage {
-            var notOwner = "你不是这个告示牌的创建者"
-            var notExist = "该告示牌不存在"
-        }
     }
 
     override fun onEnable() {
@@ -90,7 +53,6 @@ class IngameBBS : JavaPlugin(), Listener {
             dataFolder.mkdirs()
         }
         onConfigLoad()
-        onConfigChange()
         onDatabaseInit()
         onRecipesInit()
         onRegisterInit()
@@ -103,18 +65,14 @@ class IngameBBS : JavaPlugin(), Listener {
 
     fun onConfigLoad() {
         saveDefaultConfig()
-        updateConfigObject(ItemInfo, "item", config)
-        updateConfigObject(SignInfo, "sign", config)
-        updateConfigObject(InteractMessage, "interact", config)
-        updateConfigObject(VoteMessage, "vote", config)
-        updateConfigObject(ErrorMessage, "error", config)
-        logger.info("Config Loaded Successfully")
-    }
-
-    private fun onConfigChange() {
-        config.options().copyDefaults(false)
+        config.options().copyDefaults(true)
         saveConfig()
-        logger.info("Config Updated Successfully.")
+        updateConfigObject(Config.ItemInfo, "item", config)
+        updateConfigObject(Config.SignInfo, "sign", config)
+        updateConfigObject(Config.InteractMessage, "interact", config)
+        updateConfigObject(Config.VoteMessage, "vote", config)
+        updateConfigObject(Config.ErrorMessage, "error", config)
+        logger.info("Config Loaded Successfully")
     }
 
     private fun onDatabaseInit() {
@@ -126,6 +84,7 @@ class IngameBBS : JavaPlugin(), Listener {
             SchemaUtils.create(SignUsers)
             SchemaUtils.create(SignInfos)
             SchemaUtils.create(SignInteracts)
+            SchemaUtils.createMissingTablesAndColumns(SignUsers, SignInfos, SignInteracts)
         }
         logger.info("Database Initialized Successfully.")
     }
@@ -136,9 +95,9 @@ class IngameBBS : JavaPlugin(), Listener {
 
             val advancedSign = ItemStack(i)
             val im = advancedSign.itemMeta
-            im.displayName(ItemInfo.name.convert())
+            im.displayName(Config.ItemInfo.name.convert())
             val lore = mutableListOf<Component>()
-            ItemInfo.lore.split("<newline>").forEach {
+            Config.ItemInfo.lore.split("<newline>").forEach {
                 lore.add(it.convert())
             }
             im.lore(lore)

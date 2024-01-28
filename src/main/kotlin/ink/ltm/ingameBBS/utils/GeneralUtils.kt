@@ -1,6 +1,6 @@
 package ink.ltm.ingameBBS.utils
 
-import ink.ltm.ingameBBS.IngameBBS
+import ink.ltm.ingameBBS.data.Config
 import ink.ltm.ingameBBS.data.InteractType
 import ink.ltm.ingameBBS.data.SignInfoInternal
 import ink.ltm.ingameBBS.utils.DatabaseUtils.calculateSignInfo
@@ -29,9 +29,13 @@ object GeneralUtils {
             val mutableProperty = it as KMutableProperty1<*, *>
             mutableProperty.apply {
                 isAccessible = true
-                val configValue = config.getString("$prefix.${mutableProperty.name}").toString()
-                println("$name has changed to $configValue")
-                setter.call(obj, configValue)
+                val configValue = config.get("$prefix.${mutableProperty.name}")
+                if (configValue != null) {
+                    println("$name has changed to $configValue")
+                    setter.call(obj, configValue)
+                } else {
+                    println("No config value found for property $name")
+                }
             }
         }
     }
@@ -66,16 +70,17 @@ object GeneralUtils {
     suspend fun buildSignInfo(sign: SignInfoInternal): Component {
         val creator = sign.createName
         val time = sign.createTime
-        val remark = sign.signRemark
+        val content = sign.signContent
         val interactList = calculateSignInfo(sign.uniqueID)
         val likeCount = interactList.count { it.second == InteractType.LIKE }
         val dislikeCount = interactList.count { it.second == InteractType.DISLIKE }
         val uniqueID = sign.uniqueID
-        val likeButton = IngameBBS.Companion.SignInfo.likeButton.convert().clickEvent(ClickEvent.runCommand("/igb like $uniqueID"))
-        val dislikeButton = IngameBBS.Companion.SignInfo.dislikeButton.convert().clickEvent(ClickEvent.runCommand("/igb dislike $uniqueID"))
+        val likeButton = Config.SignInfo.likeButton.convert().clickEvent(ClickEvent.runCommand("/igb like $uniqueID"))
+        val dislikeButton =
+            Config.SignInfo.dislikeButton.convert().clickEvent(ClickEvent.runCommand("/igb dislike $uniqueID"))
         val component = MiniMessage.miniMessage().deserialize(
-            IngameBBS.Companion.SignInfo.message,
-            Placeholder.component("remark", Component.text(remark)),
+            Config.SignInfo.message,
+            Placeholder.component("content", Component.text(content)),
             Placeholder.component("creator", Component.text(creator)),
             Placeholder.component("date", Component.text(time)),
             Placeholder.component("like-count", Component.text(likeCount.toString())),

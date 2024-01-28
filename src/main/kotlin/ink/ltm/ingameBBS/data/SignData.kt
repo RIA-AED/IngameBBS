@@ -13,7 +13,7 @@ object SignInfos : IntIdTable() {
     val createTime = date("createTime") //创建时间，为2022/11/07 11:29这种
     val position = text("position") //放置位置
     val world = text("world")
-    val signRemark = text("signContent")
+    val signContent = text("signContent")
 
     val isDeleted: Column<Boolean> = bool("isDeleted")
 }
@@ -26,7 +26,7 @@ data class SignInfoInternal(
     val world: String,
 
     val createTime: String = "",
-    val signRemark: String = "null",
+    val signContent: String = "",
     val likeCount: Int = 0,
     val dislikeCount: Int = 0
 )

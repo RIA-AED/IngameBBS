@@ -7,7 +7,9 @@ item:
 sign:
   icon: '*'
   waiting: '等待中...'
-  message: 信息： <remark><newline>详情：由玩家 <creator> 创建于 <date><newline>累计：获赞 <like-count> ，获踩 <dislike-count><newline>互动选项： <like-button> <dislike-button>
+  message: 信息： <content><newline>详情：由玩家 <creator> 创建于 <date><newline>累计：获赞 <like-count> ，获踩 <dislike-count><newline>互动选项： <like-button> <dislike-button>
+  ownerMessage: 编辑信息 <edit-button>
+  editButton: '编辑'
   likeButton: '点赞'
   dislikeButton: '点踩'
 
@@ -15,6 +17,10 @@ sign:
 interact:
   created: '创建可互动告示牌成功'
   removed: '成功移除告示牌'
+  updatedRemark: '成功更新备注'
+  lengthLimit: 32
+  exit: '/exit'
+  inputPrompt: '请输入你的备注, 或者输入 <exit> 退出，将直接覆盖原有备注'
 
 #Vote Message
 vote:
@@ -30,3 +36,5 @@ vote:
 error:
   notOwner: '你不是这个告示牌的所有者'
   notExist: '这个告示牌不存在'
+  tooLong: '你的备注太长了，最多只能有 <length> 个字符'
+  notPlayer: '你必须是一个玩家才能执行这个命令'

@@ -8,9 +8,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Bump version to 1.1.0-Alpha">
+    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Fix UUID Find Error">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/RemarkConservation.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/Config.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/DatabaseUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/DatabaseUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/GeneralUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/GeneralUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +81,7 @@
       <list>
         <option value="Kotlin Enum" />
         <option value="Kotlin File" />
+        <option value="Kotlin Object" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -304,7 +316,7 @@
       <workItem from="1706286850657" duration="3476000" />
       <workItem from="1706347730566" duration="3235000" />
       <workItem from="1706356292637" duration="3209000" />
-      <workItem from="1706359544889" duration="8681000" />
+      <workItem from="1706359544889" duration="22919000" />
     </task>
     <task id="LOCAL-00001" summary="First Stage">
       <created>1667825644250</created>
@@ -328,7 +340,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706368628406</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix UUID Find Error">
+      <option name="closed" value="true" />
+      <created>1706369727174</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706369727174</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -349,7 +369,8 @@
     <MESSAGE value="First Stage" />
     <MESSAGE value="Bump version to 1.0.0" />
     <MESSAGE value="Bump version to 1.1.0-Alpha" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bump version to 1.1.0-Alpha" />
+    <MESSAGE value="Fix UUID Find Error" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix UUID Find Error" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

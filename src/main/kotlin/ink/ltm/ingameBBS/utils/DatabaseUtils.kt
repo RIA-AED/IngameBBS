@@ -12,7 +12,6 @@ object DatabaseUtils {
     private fun insertSignUser(playerName: String, playerUUID: String) {
         return transaction {
             addLogger(StdOutSqlLogger)
-            println("$playerName $playerUUID heading insert")
             SignUsers.insert {
                 it[this.playerName] = playerName
                 it[this.playerUUID] = playerUUID
@@ -45,7 +44,7 @@ object DatabaseUtils {
                 it[this.createTime] = getTime()
                 it[this.position] = data.position
                 it[this.world] = data.world
-                it[this.signRemark] = ""
+                it[this.signContent] = ""
                 it[this.isDeleted] = false
             }
             commit()
@@ -62,6 +61,16 @@ object DatabaseUtils {
         }
     }
 
+    fun updateSignRemark(uniqueID: String, remark: String) {
+        return transaction {
+            addLogger(StdOutSqlLogger)
+            SignInfos.update({ SignInfos.uniqueID eq uniqueID }) {
+                it[this.signContent] = remark
+            }
+            commit()
+        }
+    }
+
     suspend fun lookupSignInfo(uniqueID: String): SignInfoInternal? {
         return newSuspendedTransaction(Dispatchers.IO) {
             addLogger(StdOutSqlLogger)
@@ -69,13 +78,13 @@ object DatabaseUtils {
             if (result == null) return@newSuspendedTransaction null
             val userRes = SignUsers.selectAll().where { SignUsers.playerUUID eq result[SignInfos.creator] }.single()
             val res = SignInfoInternal(
-                result[SignInfos.uniqueID],
-                userRes[SignUsers.playerUUID],
-                userRes[SignUsers.playerName],
-                result[SignInfos.position],
-                result[SignInfos.world],
-                result[SignInfos.createTime].toString(),
-                result[SignInfos.signRemark]
+                uniqueID = result[SignInfos.uniqueID],
+                creatorUUID = userRes[SignUsers.playerUUID],
+                createName = userRes[SignUsers.playerName],
+                position = result[SignInfos.position],
+                world = result[SignInfos.world],
+                createTime = result[SignInfos.createTime].toString(),
+                signContent = result[SignInfos.signContent]
             )
             commit()
             return@newSuspendedTransaction res

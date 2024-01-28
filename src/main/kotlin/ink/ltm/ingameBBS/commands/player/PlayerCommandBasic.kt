@@ -1,18 +1,23 @@
 package ink.ltm.ingameBBS.commands.player
 
 import ink.ltm.ingameBBS.IngameBBS
+import ink.ltm.ingameBBS.data.Config
 import ink.ltm.ingameBBS.data.InteractType
-import ink.ltm.ingameBBS.utils.DatabaseUtils
 import ink.ltm.ingameBBS.utils.DatabaseUtils.checkSign
+import ink.ltm.ingameBBS.utils.DatabaseUtils.lookupSignInfo
 import ink.ltm.ingameBBS.utils.DatabaseUtils.pushSignInteract
+import ink.ltm.ingameBBS.utils.DatabaseUtils.updateSignRemark
 import ink.ltm.ingameBBS.utils.GeneralUtils
 import ink.ltm.ingameBBS.utils.GeneralUtils.soundBuilder
 import ink.ltm.ingameBBS.utils.convert
 import net.kyori.adventure.sound.Sound
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer
 import org.bukkit.Bukkit
+import org.bukkit.conversations.ConversationFactory
 import org.bukkit.entity.Player
 import revxrsal.commands.annotation.Command
 import revxrsal.commands.annotation.Description
@@ -32,7 +37,7 @@ class PlayerCommandBasic {
             pushSignInteract(signID, actor.uniqueId.toString(), actor.name, interactType)
             actor.sendMessage(actorMessage)
             actor.playSound(sound)
-            val value = DatabaseUtils.lookupSignInfo(signID)
+            val value = lookupSignInfo(signID)
             val player = Bukkit.getPlayer(UUID.fromString(value!!.creatorUUID))
             if (player != null) {
                 player.sendMessage(
@@ -47,7 +52,7 @@ class PlayerCommandBasic {
             }
 
         } else {
-            actor.sendMessage(IngameBBS.Companion.ErrorMessage.notExist.convert())
+            actor.sendMessage(Config.ErrorMessage.notExist.convert())
         }
     }
 
@@ -55,11 +60,29 @@ class PlayerCommandBasic {
     @CommandPermission("ingamebbs.player.info")
     @Command("igb info")
     suspend fun getSignInfo(actor: Player, signID: String) {
-        actor.sendMessage(IngameBBS.Companion.SignInfo.waiting.convert())
-        val value = DatabaseUtils.lookupSignInfo(signID)
+        actor.sendMessage(Config.SignInfo.waiting.convert())
+        val value = lookupSignInfo(signID)
         val signInfo = value?.let { GeneralUtils.buildSignInfo(it) }
-        val result = signInfo ?: (IngameBBS.Companion.ErrorMessage.notExist).convert()
-        actor.sendMessage(result)
+        if (signInfo != null) {
+            actor.sendMessage(signInfo)
+            if (UUID.fromString(value.creatorUUID) == actor.uniqueId) {
+                val editButton = Config.SignInfo.editButton.convert().clickEvent(
+                    ClickEvent.clickEvent(
+                        ClickEvent.Action.RUN_COMMAND,
+                        "/igb remark $signID"
+                    )
+                )
+                actor.sendMessage(
+                    MiniMessage.miniMessage().deserialize(
+                        Config.SignInfo.ownerMessage,
+                        Placeholder.component("edit-button", editButton)
+                    )
+                )
+            }
+
+        } else {
+            actor.sendMessage(Config.ErrorMessage.notExist.convert())
+        }
     }
 
     @Description("Like a sign")
@@ -70,9 +93,9 @@ class PlayerCommandBasic {
             actor,
             signID,
             InteractType.LIKE,
-            IngameBBS.Companion.VoteMessage.like.convert(),
-            soundBuilder(IngameBBS.Companion.VoteMessage.likeSound),
-            IngameBBS.Companion.VoteMessage.getLike
+            Config.VoteMessage.like.convert(),
+            soundBuilder(Config.VoteMessage.likeSound),
+            Config.VoteMessage.getLike
         )
     }
 
@@ -84,18 +107,44 @@ class PlayerCommandBasic {
             actor,
             signID,
             InteractType.DISLIKE,
-            IngameBBS.Companion.VoteMessage.dislike.convert(),
-            soundBuilder(IngameBBS.Companion.VoteMessage.dislikeSound),
-            IngameBBS.Companion.VoteMessage.getDislike
+            Config.VoteMessage.dislike.convert(),
+            soundBuilder(Config.VoteMessage.dislikeSound),
+            Config.VoteMessage.getDislike
         )
     }
 
-
-    /*
     @Description("Add a remark for sign")
     @CommandPermission("ingamebbs.player.vote")
     @Command("igb remark")
-    suspend fun remarkSign(actor: BukkitCommandActor, signID: String, remark: String) {
-        checkSign(signID)
-    }*/
+    suspend fun remarkSign(actor: Player, signID: String) {
+        if (!checkSign(signID)) {
+            actor.sendMessage(Config.ErrorMessage.notExist.convert())
+            return
+        }
+        if (actor.uniqueId.toString() != lookupSignInfo(signID)!!.creatorUUID) {
+            actor.sendMessage(Config.ErrorMessage.notOwner.convert())
+            return
+        }
+        val conv = ConversationFactory(IngameBBS.instance)
+            .withModality(false)
+            .withFirstPrompt(RemarkConservation())
+            .withTimeout(60)
+            .thatExcludesNonPlayersWithMessage(
+                LegacyComponentSerializer.legacyAmpersand().serialize(
+                    Config.ErrorMessage.notPlayer.convert()
+                )
+            )
+            .buildConversation(actor)
+        conv.addConversationAbandonedListener {
+            val remark = conv.context.getSessionData("remark") ?: return@addConversationAbandonedListener
+            Bukkit.getScheduler().runTaskAsynchronously(IngameBBS.instance, Runnable {
+                updateSignRemark(signID, remark.toString())
+            })
+            actor.sendMessage(Config.InteractMessage.updatedRemark.convert())
+            return@addConversationAbandonedListener
+        }
+        conv.begin()
+    }
 }
+
+

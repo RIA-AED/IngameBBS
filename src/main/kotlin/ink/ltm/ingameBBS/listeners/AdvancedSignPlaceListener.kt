@@ -1,6 +1,7 @@
 package ink.ltm.ingameBBS.listeners
 
 import ink.ltm.ingameBBS.IngameBBS
+import ink.ltm.ingameBBS.data.Config
 import ink.ltm.ingameBBS.data.SignInfoInternal
 import ink.ltm.ingameBBS.utils.DatabaseUtils
 import ink.ltm.ingameBBS.utils.DatabaseUtils.insertSignInfo
@@ -57,7 +58,7 @@ class AdvancedSignPlaceListener : Listener {
                     )
                     sign.update()
                 }
-                player.sendMessage(IngameBBS.Companion.InteractMessage.created.convert())
+                player.sendMessage(Config.InteractMessage.created.convert())
             }
         }
     }
@@ -68,7 +69,7 @@ class AdvancedSignPlaceListener : Listener {
         val currentSide = event.side.name
         if (checkSignPDCTrue(block, IngameBBS.Companion.NamespacedKeys.advancedSign)) {
             block.isWaxed = true
-            val icon = IngameBBS.Companion.SignInfo.icon.convert()
+            val icon = Config.SignInfo.icon.convert()
             val commandEvent = clickEvent(
                 ClickEvent.Action.RUN_COMMAND, "igb info ${
                     block.persistentDataContainer.get(
@@ -76,12 +77,15 @@ class AdvancedSignPlaceListener : Listener {
                     )
                 }"
             )
-            Side.entries.single { it.name != currentSide }.let {
-                block.getSide(it).line(0, icon.clickEvent(commandEvent).append(event.line(0)!!))
-            }
             event.line(
                 0, icon.clickEvent(commandEvent).append(event.line(0)!!)
             )
+            Side.entries.single { it.name != currentSide }.let { side ->
+                val signSide = block.getSide(side)
+                event.lines().forEachIndexed { index, component ->
+                    signSide.line(index, component)
+                }
+            }
             block.update()
         }
     }
@@ -104,22 +108,22 @@ class AdvancedSignPlaceListener : Listener {
             sign.persistentDataContainer.remove(IngameBBS.Companion.NamespacedKeys.advancedSign)
             sign.persistentDataContainer.remove(IngameBBS.Companion.NamespacedKeys.advancedSignID)
             sign.update()
-            event.player.sendMessage(IngameBBS.Companion.InteractMessage.removed.convert())
+            event.player.sendMessage(Config.InteractMessage.removed.convert())
         }
     }
 
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
-        val name = player.name
-        if (IngameBBS.offlineMap[name] != null) {
+        val uuid = player.uniqueId.toString()
+        if (IngameBBS.offlineMap[uuid] != null) {
             player.sendMessage(
                 MiniMessage.miniMessage().deserialize(
-                    IngameBBS.Companion.VoteMessage.offlineMessage,
-                    Placeholder.component("count", Component.text(IngameBBS.offlineMap[name].toString()))
+                    Config.VoteMessage.offlineMessage,
+                    Placeholder.component("count", Component.text(IngameBBS.offlineMap[uuid].toString()))
                 )
             )
-            IngameBBS.offlineMap.remove(name)
+            IngameBBS.offlineMap.remove(uuid)
         }
     }
 }
