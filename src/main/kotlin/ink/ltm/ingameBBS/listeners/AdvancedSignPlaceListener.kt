@@ -68,24 +68,40 @@ class AdvancedSignPlaceListener : Listener {
         val block = event.block.state as Sign
         val currentSide = event.side.name
         if (checkSignPDCTrue(block, IngameBBS.Companion.NamespacedKeys.advancedSign)) {
-            block.isWaxed = true
             val icon = Config.SignInfo.icon.convert()
-            val commandEvent = clickEvent(
+            val commandEvent1 = clickEvent(
                 ClickEvent.Action.RUN_COMMAND, "igb info ${
                     block.persistentDataContainer.get(
                         IngameBBS.Companion.NamespacedKeys.advancedSignID, PersistentDataType.STRING
                     )
                 }"
             )
+            val tmp = event.line(0)!!
             event.line(
-                0, icon.clickEvent(commandEvent).append(event.line(0)!!)
+                0, icon.clickEvent(commandEvent1).append(tmp)
+            )
+
+
+
+
+            val commandEvent2 = clickEvent(
+                ClickEvent.Action.RUN_COMMAND, "igb info ${
+                    block.persistentDataContainer.get(
+                        IngameBBS.Companion.NamespacedKeys.advancedSignID, PersistentDataType.STRING
+                    )
+                }"
             )
             Side.entries.single { it.name != currentSide }.let { side ->
                 val signSide = block.getSide(side)
-                event.lines().forEachIndexed { index, component ->
-                    signSide.line(index, component)
+                signSide.line(0, icon.clickEvent(commandEvent2).append(tmp))
+                event.lines().forEachIndexed { index, line ->
+                    if (index != 0) {
+                        signSide.line(index, line)
+                    }
                 }
             }
+            block.update()
+            block.isWaxed = true
             block.update()
         }
     }

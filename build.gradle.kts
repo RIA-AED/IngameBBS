@@ -8,9 +8,9 @@ plugins {
 }
 
 group = "ink.ltm"
-version = "1.1.1-SNAPSHOT"
-val lampVersion = "3.1.8"
-val exposedVersion = "0.46.0"
+version = "1.1.3-SNAPSHOT"
+val lampVersion = "3.1.9"
+val exposedVersion = "0.47.0"
 val adventureVersion = "4.15.0"
 
 repositories {

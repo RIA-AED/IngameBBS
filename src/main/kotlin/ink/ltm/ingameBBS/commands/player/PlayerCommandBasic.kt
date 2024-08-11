@@ -136,12 +136,12 @@ class PlayerCommandBasic {
             )
             .buildConversation(actor)
         conv.addConversationAbandonedListener {
-            val remark = conv.context.getSessionData("remark") ?: return@addConversationAbandonedListener
+            val remark = conv.context.getSessionData("remark") ?: conv.abandon()
             Bukkit.getScheduler().runTaskAsynchronously(IngameBBS.instance, Runnable {
                 updateSignRemark(signID, remark.toString())
             })
             actor.sendMessage(Config.InteractMessage.updatedRemark.convert())
-            return@addConversationAbandonedListener
+            conv.abandon()
         }
         conv.begin()
     }

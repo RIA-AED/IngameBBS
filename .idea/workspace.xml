@@ -8,19 +8,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Fix UUID Find Error">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/RemarkConservation.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/Config.kt" afterDir="false" />
+    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Bump to 1.1.1,&#10;Add Edit and Remark">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/DatabaseUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/DatabaseUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/GeneralUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/GeneralUtils.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +117,7 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/longt/IdeaProjects/IngameBBS/src/main/resources",
+    "last_opened_file_path": "C:/Users/longt/IdeaProjects/IngameBBS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -277,7 +270,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.300" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.300" />
       </set>
     </attachedChunks>
   </component>
@@ -316,7 +310,10 @@
       <workItem from="1706286850657" duration="3476000" />
       <workItem from="1706347730566" duration="3235000" />
       <workItem from="1706356292637" duration="3209000" />
-      <workItem from="1706359544889" duration="22919000" />
+      <workItem from="1706359544889" duration="27660000" />
+      <workItem from="1706855895381" duration="230000" />
+      <workItem from="1707840559265" duration="1143000" />
+      <workItem from="1723391872555" duration="902000" />
     </task>
     <task id="LOCAL-00001" summary="First Stage">
       <created>1667825644250</created>
@@ -348,7 +345,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706369727174</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Bump to 1.1.1,&#10;Add Edit and Remark">
+      <option name="closed" value="true" />
+      <created>1706432831742</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706432831742</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -370,7 +375,8 @@
     <MESSAGE value="Bump version to 1.0.0" />
     <MESSAGE value="Bump version to 1.1.0-Alpha" />
     <MESSAGE value="Fix UUID Find Error" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix UUID Find Error" />
+    <MESSAGE value="Bump to 1.1.1,&#10;Add Edit and Remark" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bump to 1.1.1,&#10;Add Edit and Remark" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
