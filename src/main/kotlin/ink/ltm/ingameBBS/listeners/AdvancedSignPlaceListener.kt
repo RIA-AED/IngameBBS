@@ -82,8 +82,6 @@ class AdvancedSignPlaceListener : Listener {
             )
 
 
-
-
             val commandEvent2 = clickEvent(
                 ClickEvent.Action.RUN_COMMAND, "igb info ${
                     block.persistentDataContainer.get(

@@ -45,5 +45,6 @@ object Config {
         var notExist = "该告示牌不存在"
         var tooLong = "备注信息过长，最多 <length> 个字符"
         var notPlayer = "你必须是一名玩家"
+        var conversing = "你正在进行对话，请完成当前对话"
     }
 }

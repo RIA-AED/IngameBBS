@@ -125,6 +125,9 @@ class PlayerCommandBasic {
             actor.sendMessage(Config.ErrorMessage.notOwner.convert())
             return
         }
+        if (actor.isConversing) {
+            actor.sendMessage(Config.ErrorMessage.conversing.convert())
+        }
         val conv = ConversationFactory(IngameBBS.instance)
             .withModality(false)
             .withFirstPrompt(RemarkConservation())
@@ -136,7 +139,7 @@ class PlayerCommandBasic {
             )
             .buildConversation(actor)
         conv.addConversationAbandonedListener {
-            val remark = conv.context.getSessionData("remark") ?: conv.abandon()
+            val remark = conv.context.getSessionData("remark") ?: ""
             Bukkit.getScheduler().runTaskAsynchronously(IngameBBS.instance, Runnable {
                 updateSignRemark(signID, remark.toString())
             })
