@@ -127,6 +127,7 @@ class PlayerCommandBasic {
         }
         if (actor.isConversing) {
             actor.sendMessage(Config.ErrorMessage.conversing.convert())
+            return
         }
         val conv = ConversationFactory(IngameBBS.instance)
             .withModality(false)

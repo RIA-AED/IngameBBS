@@ -8,14 +8,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Bump to 1.1.4,&#10;Fixed Bugs">
+    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Bump to 1.1.6,&#10;Fixed Bugs in Conversation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/player/PlayerCommandBasic.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/Config.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/Config.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,7 +311,8 @@
       <workItem from="1723391872555" duration="3116000" />
       <workItem from="1723554197763" duration="424000" />
       <workItem from="1723618887130" duration="189000" />
-      <workItem from="1723619117333" duration="414000" />
+      <workItem from="1723619117333" duration="1159000" />
+      <workItem from="1723923160206" duration="32000" />
     </task>
     <task id="LOCAL-00001" summary="First Stage">
       <created>1667825644250</created>
@@ -365,7 +360,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723392881521</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Bump to 1.1.6,&#10;Fixed Bugs in Conversation">
+      <option name="closed" value="true" />
+      <created>1723619631376</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1723619631376</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +392,8 @@
     <MESSAGE value="Fix UUID Find Error" />
     <MESSAGE value="Bump to 1.1.1,&#10;Add Edit and Remark" />
     <MESSAGE value="Bump to 1.1.4,&#10;Fixed Bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bump to 1.1.4,&#10;Fixed Bugs" />
+    <MESSAGE value="Bump to 1.1.6,&#10;Fixed Bugs in Conversation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bump to 1.1.6,&#10;Fixed Bugs in Conversation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
