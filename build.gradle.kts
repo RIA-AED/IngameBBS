@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "ink.ltm"
-version = "1.1.6-SNAPSHOT"
+version = "1.1.7-SNAPSHOT"
 val lampVersion = "3.2.1"
 val exposedVersion = "0.47.0"
 val adventureVersion = "4.15.0"
