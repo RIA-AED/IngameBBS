@@ -8,8 +8,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Bump to 1.1.7,&#10;Fixed Bugs in Conversation">
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+    <list default="true" id="2ea151cf-4fa6-4682-b216-ffd4d358a2ec" name="变更" comment="Bump to 1.1.8,&#10;Fix bugs in click event on sign, add repair command">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/commands/admin/RepairSigns.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/IngameBBS.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/data/SignData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/listeners/AdvancedSignPlaceListener.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/DatabaseUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/DatabaseUtils.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/GeneralUtils.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/ink/ltm/ingameBBS/utils/GeneralUtils.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +83,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\longt\.gradle\wrapper\dists\gradle-8.1.1-bin\9wiye5v2saajue4irfo8ybqfp\gradle-8.1.1" javaHome="C:\Program Files\Amazon Corretto\jdk17.0.15_6" gradleVersion="8.1.1" />
   <component name="InvalidFacetManager">
     <ignored-facets>
       <facet id="IngameBBS.main/invalid/Minecraft" />
@@ -84,6 +91,10 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
@@ -93,7 +104,6 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2HAfJB1mZzeoRIsol9X7XEVjrdJ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -153,8 +163,11 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration name="IngameBBS [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -175,8 +188,11 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration name="IngameBBS [knows]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -197,8 +213,11 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration name="IngameBBS [runServer]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -219,8 +238,11 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <configuration name="IngameBBS [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -241,8 +263,11 @@
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
       <DebugAllEnabled>false</DebugAllEnabled>
       <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
     <list>
@@ -402,7 +427,8 @@
     <MESSAGE value="Bump to 1.1.4,&#10;Fixed Bugs" />
     <MESSAGE value="Bump to 1.1.6,&#10;Fixed Bugs in Conversation" />
     <MESSAGE value="Bump to 1.1.7,&#10;Fixed Bugs in Conversation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bump to 1.1.7,&#10;Fixed Bugs in Conversation" />
+    <MESSAGE value="Bump to 1.1.8,&#10;Fix bugs in click event on sign, add repair command" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bump to 1.1.8,&#10;Fix bugs in click event on sign, add repair command" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

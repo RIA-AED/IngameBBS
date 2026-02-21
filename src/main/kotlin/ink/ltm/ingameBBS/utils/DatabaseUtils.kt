@@ -101,6 +101,19 @@ object DatabaseUtils {
         }
     }
 
+    fun listSignLocations(): List<SignLocationRecord> {
+        return transaction {
+            addLogger(StdOutSqlLogger)
+            SignInfos.selectAll().map {
+                SignLocationRecord(
+                    uniqueID = it[SignInfos.uniqueID],
+                    position = it[SignInfos.position],
+                    world = it[SignInfos.world]
+                )
+            }
+        }
+    }
+
     suspend fun pushSignInteract(signID: String, playerUUID: String, playerName: String, type: InteractType) {
         return newSuspendedTransaction(Dispatchers.IO) {
             addLogger(StdOutSqlLogger)

@@ -14,8 +14,10 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.NamespacedKey
 import org.bukkit.block.Sign
+import org.bukkit.block.sign.Side
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
@@ -56,6 +58,36 @@ object GeneralUtils {
 
     fun getSignPDCValue(sign: Sign, key: NamespacedKey): String? {
         return sign.persistentDataContainer.get(key, PersistentDataType.STRING)
+    }
+
+    fun buildAdvancedLine0(signId: String, base: Component): Component {
+        val icon = Config.SignInfo.icon.convert()
+        val iconPlain = PlainTextComponentSerializer.plainText().serialize(icon)
+        val basePlain = PlainTextComponentSerializer.plainText().serialize(base)
+        val withCommand = icon.clickEvent(ClickEvent.runCommand("igb info $signId"))
+        return if (iconPlain.isNotEmpty() && basePlain.startsWith(iconPlain)) {
+            base
+        } else {
+            withCommand.append(base)
+        }
+    }
+
+    fun applyAdvancedSignText(sign: Sign, signId: String, lines: List<Component>) {
+        val line0 = buildAdvancedLine0(signId, lines.getOrNull(0) ?: Component.empty())
+        val fullLines = listOf(
+            line0,
+            lines.getOrNull(1) ?: Component.empty(),
+            lines.getOrNull(2) ?: Component.empty(),
+            lines.getOrNull(3) ?: Component.empty()
+        )
+        Side.entries.forEach { side ->
+            val signSide = sign.getSide(side)
+            fullLines.forEachIndexed { index, line ->
+                signSide.line(index, line)
+            }
+        }
+        sign.isWaxed = true
+        sign.update()
     }
 
     fun getTime(): LocalDate {

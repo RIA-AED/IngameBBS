@@ -1,6 +1,7 @@
 package ink.ltm.ingameBBS
 
 import ink.ltm.ingameBBS.commands.admin.ReloadConfig
+import ink.ltm.ingameBBS.commands.admin.RepairSigns
 import ink.ltm.ingameBBS.commands.player.PlayerCommandBasic
 import ink.ltm.ingameBBS.data.Config
 import ink.ltm.ingameBBS.data.SignInfos
@@ -124,6 +125,7 @@ class IngameBBS : JavaPlugin(), Listener {
         commandHandler.supportSuspendFunctions()
         commandHandler.register(PlayerCommandBasic())
         commandHandler.register(ReloadConfig())
+        commandHandler.register(RepairSigns())
         commandHandler.registerBrigadier()
 
         logger.info("Command Initialized Successfully.")

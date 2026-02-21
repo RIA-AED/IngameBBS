@@ -31,6 +31,12 @@ data class SignInfoInternal(
     val dislikeCount: Int = 0
 )
 
+data class SignLocationRecord(
+    val uniqueID: String,
+    val position: String,
+    val world: String
+)
+
 object SignUsers : Table() {
     val playerUUID = varchar("playerUUID", 36).uniqueIndex()
     val playerName = varchar("playerName", 32)

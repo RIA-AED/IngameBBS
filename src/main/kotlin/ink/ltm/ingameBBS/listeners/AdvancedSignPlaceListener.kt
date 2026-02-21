@@ -6,18 +6,17 @@ import ink.ltm.ingameBBS.data.SignInfoInternal
 import ink.ltm.ingameBBS.utils.DatabaseUtils
 import ink.ltm.ingameBBS.utils.DatabaseUtils.insertSignInfo
 import ink.ltm.ingameBBS.utils.GeneralUtils
+import ink.ltm.ingameBBS.utils.GeneralUtils.applyAdvancedSignText
+import ink.ltm.ingameBBS.utils.GeneralUtils.buildAdvancedLine0
 import ink.ltm.ingameBBS.utils.GeneralUtils.checkSignPDCTrue
 import ink.ltm.ingameBBS.utils.GeneralUtils.getSignPDCValue
 import ink.ltm.ingameBBS.utils.convert
 import kotlinx.coroutines.Runnable
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.event.ClickEvent
-import net.kyori.adventure.text.event.ClickEvent.clickEvent
 import net.kyori.adventure.text.minimessage.MiniMessage
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder
 import org.bukkit.Bukkit
 import org.bukkit.block.Sign
-import org.bukkit.block.sign.Side
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
@@ -66,41 +65,17 @@ class AdvancedSignPlaceListener : Listener {
     @EventHandler
     fun onChangeSign(event: SignChangeEvent) {
         val block = event.block.state as Sign
-        val currentSide = event.side.name
         if (checkSignPDCTrue(block, IngameBBS.Companion.NamespacedKeys.advancedSign)) {
-            val icon = Config.SignInfo.icon.convert()
-            val commandEvent1 = clickEvent(
-                ClickEvent.Action.RUN_COMMAND, "igb info ${
-                    block.persistentDataContainer.get(
-                        IngameBBS.Companion.NamespacedKeys.advancedSignID, PersistentDataType.STRING
-                    )
-                }"
-            )
-            val tmp = event.line(0)!!
-            event.line(
-                0, icon.clickEvent(commandEvent1).append(tmp)
-            )
-
-
-            val commandEvent2 = clickEvent(
-                ClickEvent.Action.RUN_COMMAND, "igb info ${
-                    block.persistentDataContainer.get(
-                        IngameBBS.Companion.NamespacedKeys.advancedSignID, PersistentDataType.STRING
-                    )
-                }"
-            )
-            Side.entries.single { it.name != currentSide }.let { side ->
-                val signSide = block.getSide(side)
-                signSide.line(0, icon.clickEvent(commandEvent2).append(tmp))
-                event.lines().forEachIndexed { index, line ->
-                    if (index != 0) {
-                        signSide.line(index, line)
-                    }
-                }
-            }
-            block.update()
-            block.isWaxed = true
-            block.update()
+            val signId = block.persistentDataContainer.get(
+                IngameBBS.Companion.NamespacedKeys.advancedSignID,
+                PersistentDataType.STRING
+            ) ?: return
+            val baseLines = event.lines().map { it ?: Component.empty() }
+            event.line(0, buildAdvancedLine0(signId, baseLines.getOrNull(0) ?: Component.empty()))
+            Bukkit.getScheduler().runTask(IngameBBS.instance, Runnable {
+                val sign = event.block.state as? Sign ?: return@Runnable
+                applyAdvancedSignText(sign, signId, baseLines)
+            })
         }
     }
 
